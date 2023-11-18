@@ -1,0 +1,50 @@
+lexing test
+
+#include "main.hpp"
+
+int main() {
+    std::cout << "Enter your command" << std::endl;
+
+    std::string input = "set temp id 4 to 5";
+    Lexer lexer(input);
+
+    auto tokens = lexer.tokenize();
+
+    printTokens(tokens);
+}
+
+Any input shoul be formated
+
+int main() {
+
+
+    std::string input = "advance 20 20";
+    Command command(input);
+    printTokens(command.getTokens());
+
+    std::optional<CommandType> cmdt = command.getCommandType();
+    std::cout << "Value: " << Command::commandTypeToString(cmdt) << std::endl;
+}
+
+
+MAIN TO TEST
+#include "main.hpp"
+
+int main() {
+    auto start = std::chrono::high_resolution_clock::now();
+
+    std::string input = "plista puta";
+    Command command(input);
+    printTokens(command.getTokens());
+
+    auto stop = std::chrono::high_resolution_clock::now();
+
+    const PropertyReference& TempRef = PropertyReferenceTable.at("Temperature");
+
+    std::cout << "Reference Name : " << TempRef.getMin().value() << std::endl;
+
+    std::cout << "Value: " << command.getCommandTypeAsString() << std::endl;
+
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+    std::cout << "Time taken by function: " << duration.count() << " microseconds" << std::endl;
+}
