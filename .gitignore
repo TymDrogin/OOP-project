@@ -31,10 +31,6 @@
 *.out
 *.app
 
-# IDE
-.vs/
-.idea/
-
 # Compiler out
 /out/
 /cmake-build-debug/
