@@ -38,7 +38,7 @@ Token Lexer::nextToken() {
 	char c = getCurrentChar();
 
 	if (c == '\0') {
-		return Token(TokenType::EoF, "EOF"); // Return an EoF token
+		return Token(TokenType::EoF, "EOF");
 	}
     if (isdigit(c)) {
         return parseNumber();
@@ -78,7 +78,6 @@ Token Lexer::parseIdentifier() {
 	while (isalpha(getCurrentChar()) || isdigit(getCurrentChar())) {
 		lexeme += getCurrentChar();
 		advance();
-		//if lexeme is in constants return Token constant with value 
 	}
 
 	Token token(TokenType::Keyword, lexeme);
