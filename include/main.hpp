@@ -4,4 +4,4 @@
 #include <string>
 
 #include "command.hpp"
-
+#include "App.hpp"

@@ -28,14 +28,18 @@ void App::run() {
         console.clear();
 
         std::string input;
-        console << set_color(4) << "House-sim>>> " >> input;
-
+        console << set_color(0) << "House-sim>>> " >> input;
+        std::string processedInput = Command(input).getCommandTypeAsString();
+        getchar();
         console.clear();
 
-        std::string processedInput = Command(input).getCommandTypeAsString();
-        console << set_color(4) << "Your command type is: " + processedInput;
-
-        getchar();
+        if(Command(input).isValid()) {
+            console << set_color(2) << "Your command type is: " + processedInput;
+            getchar();
+        } else {
+            console << set_color(4) << "Your command type is: " + processedInput;
+            getchar();
+        }
 
         if(processedInput == "Exit") {
             break;

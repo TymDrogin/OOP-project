@@ -4,8 +4,6 @@
 
 int main() {
 
-    std::string input = "advance 10";
-    Command command(input);
-    printTokens(command.getTokens());
+    App::instance().run();
     return 0;
 }
