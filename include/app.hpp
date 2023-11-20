@@ -2,18 +2,13 @@
 
 // App is a heart of a project that puts
 // Every part together
-#include "command.hpp"
+#include "user-input-processing/command.hpp"
 #include "../lib/Terminal.h"
-
-
-
 
 
 class App {
 public:
     static App& instance();
-
-
     void run();
     void close();
 
@@ -25,7 +20,6 @@ public:
 
 private:
     App();
-
-    term::Window ;
+    static void setTerminalDimensions(int x, int y);
 };
 

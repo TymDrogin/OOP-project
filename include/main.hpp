@@ -3,6 +3,6 @@
 #include <chrono>
 #include <string>
 
-#include "lexer.hpp"
-#include "command.hpp"
+#include "user-input-processing/lexer.hpp"
+#include "user-input-processing/command.hpp"
 #include "app.hpp"

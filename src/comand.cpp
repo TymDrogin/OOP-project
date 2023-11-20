@@ -1,4 +1,4 @@
-#include "command.hpp"
+#include "user-input-processing/command.hpp"
 
 Command::Command(std::string command) {
     Lexer lexer(command);
