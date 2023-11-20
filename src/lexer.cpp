@@ -70,9 +70,11 @@ Token Lexer::parseNumber() {
 		// Read decimal part
 		readWhileIsDigit();
 	}
+    */
+
 	Token token(TokenType::Number, lexeme);
 	return token;
-	 */
+
 }
 Token Lexer::parseIdentifier() {
 	std::string lexeme;

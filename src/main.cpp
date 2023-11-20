@@ -4,7 +4,7 @@
 
 int main() {
 
-    std::string input = "advance 20 20";
+    std::string input = "advance 10";
     Command command(input);
     printTokens(command.getTokens());
     return 0;
