@@ -1,4 +1,4 @@
-#include "user-input-processing/token.hpp"
+#include "token.hpp"
 
 /*Constructor*/
 Token::Token(TokenType t, const std::string& l) : _type(t), _lexeme(l) {};

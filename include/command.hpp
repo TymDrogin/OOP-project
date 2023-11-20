@@ -41,7 +41,10 @@ enum class CommandType {
     Plista,
 
     // -------Additional general commands--------
-    Exec
+    Exec,
+
+    // -------Special commands----------
+    Exit
 };
 
 class Command {
@@ -93,5 +96,9 @@ private:
 
     // -------Additional general commands--------
     bool isExec() const;
+
+    // -------Special commands----------
+    bool isExit() const;
+
 };
 

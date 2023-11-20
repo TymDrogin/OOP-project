@@ -2,7 +2,7 @@
 
 // App is a heart of a project that puts
 // Every part together
-#include "user-input-processing/command.hpp"
+#include "command.hpp"
 #include "../lib/Terminal.h"
 
 

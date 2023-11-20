@@ -1,7 +1,7 @@
 #include "app.hpp"
 
 #define APP_WIDTH 70
-#define APP_HEIGHT 25
+#define APP_HEIGHT 24
 
 using namespace term;
 
@@ -22,11 +22,25 @@ void App::run() {
     for(int i=1; i<25; i++) {
         trm.init_color(i, i, 0);
     }
+    Window console = Window(0, (APP_HEIGHT * 3) / 4, APP_WIDTH, APP_HEIGHT / 4, true);
 
-    Window console = Window(0, 0 , trm.getNumCols(), trm.getNumRows(), true);
+    while(true) {
+        console.clear();
 
+        std::string input;
+        console << set_color(4) << "House-sim>>> " >> input;
 
+        console.clear();
 
+        std::string processedInput = Command(input).getCommandTypeAsString();
+        console << set_color(4) << "Your command type is: " + processedInput;
+
+        getchar();
+
+        if(processedInput == "Exit") {
+            break;
+        }
+    }
 
     getchar();
 

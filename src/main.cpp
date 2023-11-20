@@ -2,8 +2,10 @@
 #include "main.hpp"
 
 
-int main(int argc, char* argv[]) {
+int main() {
 
-    App::instance().run();
+    std::string input = "advance 20 20";
+    Command command(input);
+    printTokens(command.getTokens());
     return 0;
 }

@@ -1,4 +1,4 @@
-#include "user-input-processing/command.hpp"
+#include "command.hpp"
 
 Command::Command(std::string command) {
     Lexer lexer(command);
@@ -44,6 +44,8 @@ std::optional<CommandType> Command::getCommandType() const {
     if (isPlista())  return CommandType::Plista;
 
     if (isExec()) return CommandType::Exec;
+
+    if(isExit()) return CommandType::Exit;
 
     return std::nullopt;  // No match found
 }
@@ -101,6 +103,8 @@ std::string Command::getCommandTypeAsString() const {
                 return "Plista";
             case CommandType::Exec:
                 return "Exec";
+            case CommandType::Exit:
+                return "Exit";
         }
     } else {
         return "Unknown";
@@ -287,6 +291,14 @@ bool Command::isExec() const {
     if (_tokens.size() == 2) {
         return _tokens[0].getLexeme() == "exec"
                && _tokens[1].getType() == TokenType::Keyword;
+    }
+    return false;
+}
+
+// -------Special commands----------
+bool Command::isExit() const {
+    if(_tokens.size() == 1) {
+        return _tokens[0].getLexeme() == "exit";
     }
     return false;
 }

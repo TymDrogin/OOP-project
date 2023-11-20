@@ -1,4 +1,4 @@
-#include "user-input-processing/lexer.hpp"
+#include "lexer.hpp"
 
 
 /*Constructor*/
@@ -45,6 +45,8 @@ Token Lexer::nextToken() {
     }
     else if (isalpha(c)) {
         return parseIdentifier();
+    } else {
+        throw std::logic_error("tokenization error");
     }
 }
 Token Lexer::parseNumber() {
