@@ -22,15 +22,18 @@ void App::run() {
     for(int i=1; i<25; i++) {
         trm.init_color(i, i, 0);
     }
+
     Window console = Window(0, (APP_HEIGHT * 3) / 4, APP_WIDTH, APP_HEIGHT / 4, true);
 
     while(true) {
         console.clear();
 
+        console << set_color(0) << "House-sim>>> ";
+
         std::string input;
-        console << set_color(0) << "House-sim>>> " >> input;
+        console << set_color(2) >> input;
+
         std::string processedInput = Command(input).getCommandTypeAsString();
-        getchar();
         console.clear();
 
         if(Command(input).isValid()) {
@@ -41,17 +44,14 @@ void App::run() {
             getchar();
         }
 
-        if(processedInput == "Exit") {
-            break;
+        if(processedInput == "exit") {
+            App::instance().close();
         }
     }
-
-    getchar();
-
 }
 void App::close() {
     //TODO: Autosave?
-    term::Terminal::instance().~Terminal();
+    close();
 }
 
 void App::setTerminalDimensions(int x, int y) {
