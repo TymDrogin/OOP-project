@@ -51,7 +51,6 @@ void App::run() {
 }
 void App::close() {
     //TODO: Autosave?
-    close();
 }
 
 void App::setTerminalDimensions(int x, int y) {
