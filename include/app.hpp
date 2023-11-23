@@ -21,5 +21,7 @@ public:
 private:
     App();
     static void setTerminalDimensions(int x, int y);
+    static std::vector<term::Window> getHousingGrid();
+    static std::unique_ptr<term::Window> getConsole();
 };
 

@@ -35,6 +35,10 @@
 /out/
 /cmake-build-debug/
 
+# CMAKE CONFIG
+CMakeLists.txt
+
+
 # Libraries
 /lib/curses.h
 /lib/pdcurses.a
