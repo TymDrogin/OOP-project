@@ -99,6 +99,5 @@ private:
 
     // -------Special commands----------
     bool isExit() const;
-
 };
 

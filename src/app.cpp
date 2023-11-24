@@ -22,6 +22,7 @@ void App::run() {
     Window logs = Window(APP_WIDTH / 2, 0, APP_WIDTH / 2, (APP_HEIGHT * 3) / 4, true);
     //Window housingGridBorder = Window(0, 0, APP_WIDTH / 2, (APP_HEIGHT * 3) / 4, true);
 
+    //TODO: Simplify grid to a single window
     Window* housingGrid[APP_HOUSING_ROWS][APP_HOUSING_COLUMNS];
 
     for (int i = 0; i < APP_HOUSING_ROWS; ++i) {
@@ -40,15 +41,6 @@ void App::run() {
             housingGrid[i][j]->operator<<(set_color(tileIndex)).operator<<(tileIndex);
         }
     }
-
-
-
-
-
-
-
-
-
 
     while(true) {
         console.clear();
@@ -74,6 +66,10 @@ void App::run() {
         }
     }
 }
+
+
+
+
 void App::close() {
     //TODO: Autosave?
 }
