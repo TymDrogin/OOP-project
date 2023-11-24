@@ -1,7 +1,5 @@
 #include "app.hpp"
 
-#define APP_WIDTH 80
-#define APP_HEIGHT 24
 
 using namespace term;
 
@@ -11,9 +9,6 @@ App& App::instance() {
     static App instance;
     return instance;
 }
-
-
-
 void App::run() {
 
     //TODO: ADAT FOR LINUX
@@ -25,6 +20,7 @@ void App::run() {
     }
 
     Window console = Window(0, (APP_HEIGHT * 3) / 4, APP_WIDTH, APP_HEIGHT / 4, true);
+
 
     while(true) {
         console.clear();
@@ -62,15 +58,21 @@ void App::setTerminalDimensions(int x, int y) {
 #ifdef _WIN32
     if(callCounter < 1) {
         std::system(("mode con: cols=" + std::to_string(x) + " lines=" + std::to_string(y)).c_str());
-        callCounter = callCounter + 1;
     }
+    callCounter = callCounter + 1;
 #else
     if(callCounter < 1) {
-        //TODO: finish escae sequence
         resize_term(APP_WIDTH, APP_HEIGHT);
-        // echo -e "\e[8;30;60t"
-        callCounter = callCounter + 1;
     }
+    callCounter = callCounter + 1;
 #endif
 }
 
+
+HousingGrid& HousingGrid::instance() {
+    static HousingGrid gridInstance; // Static instance ensures a single instance is created
+    return gridInstance;
+}
+
+HousingGrid::HousingGrid() {
+}
