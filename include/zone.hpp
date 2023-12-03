@@ -1,14 +1,13 @@
-//
-// Created by Tim on 11/20/2023.
-//
+#pragma once
+#include "sensor.hpp"
+#include "property.hpp"
 
-#ifndef OOP_PROJECT_ZONE_HPP
-#define OOP_PROJECT_ZONE_HPP
-
+#include <vector>
 
 class Zone {
+private:
+    std::vector<Sensor> _sensors;
 
 };
 
 
-#endif //OOP_PROJECT_ZONE_HPP

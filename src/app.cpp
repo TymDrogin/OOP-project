@@ -68,11 +68,3 @@ void App::setTerminalDimensions(int x, int y) {
 #endif
 }
 
-
-HousingGrid& HousingGrid::instance() {
-    static HousingGrid gridInstance; // Static instance ensures a single instance is created
-    return gridInstance;
-}
-
-HousingGrid::HousingGrid() {
-}

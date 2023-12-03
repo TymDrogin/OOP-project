@@ -180,11 +180,11 @@ bool Command::isZprops() const {
 }
 bool Command::isPmod() const {
     if (_tokens.size() == 4) {
-        bool isPropertyNameValidAndExists = PropertyReferenceTable.count(_tokens[2].getLexeme());
+        // FIXME: bool isPropertyNameValidAndExists = PropertyReferenceTable.count(_tokens[2].getLexeme());
 
         return _tokens[0].getLexeme() == "pmod"
                && _tokens[1].getType() == TokenType::Number
-               && isPropertyNameValidAndExists
+               //&& isPropertyNameValidAndExists
                && _tokens[3].getType() == TokenType::Number;
     }
     return false;
