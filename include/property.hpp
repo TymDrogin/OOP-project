@@ -23,8 +23,10 @@ protected:
     const int _min;
     const int _max;
 
-public:
     PropertyReference(const std::string name, const std::string units, const int min, const int max);
+
+public:
+
 
     std::string getName() const;
     std::string getUnits() const;
