@@ -1,15 +1,15 @@
 #include "command.hpp"
 
-Command::Command(std::string command) {
+CommandFromString::CommandFromString(std::string command) {
     Lexer lexer(command);
     _tokens = lexer.tokenize();
 }
 
-bool Command::isValid() const {
+bool CommandFromString::isValid() const {
     return static_cast<bool>(getCommandType());
 }
 
-std::optional<CommandType> Command::getCommandType() const {
+std::optional<CommandType> CommandFromString::getCommandType() const {
     if (_tokens.empty()) {
         // Handle the case where there are no tokens.
         return std::nullopt;
@@ -49,9 +49,9 @@ std::optional<CommandType> Command::getCommandType() const {
 
     return std::nullopt;  // No match found
 }
-std::vector<Token> Command::getTokens() const {return _tokens;}
+std::vector<Token> CommandFromString::getTokens() const {return _tokens;}
 
-std::string Command::getCommandTypeAsString() const {
+std::string CommandFromString::getCommandTypeAsString() const {
     std::optional<CommandType> t = getCommandType();
     if(t) {
         switch (t.value()) {
@@ -112,13 +112,13 @@ std::string Command::getCommandTypeAsString() const {
 }
 
 // -------Commands for simulated time-------
-bool Command::isNext() const {
+bool CommandFromString::isNext() const {
     if (_tokens.size() == 1) {
         return _tokens[0].getLexeme() == "next";
     }
     return false;
 }
-bool Command::isAdvance() const {
+bool CommandFromString::isAdvance() const {
     if (_tokens.size() == 2) {
         return _tokens[0].getLexeme() == "advance"
                 && _tokens[1].getType() == TokenType::Number;
@@ -127,7 +127,7 @@ bool Command::isAdvance() const {
 }
 
 // -------Commands for managing housing and zones------
-bool Command::isHnova() const {
+bool CommandFromString::isHnova() const {
     if (_tokens.size() == 3) {
         return _tokens[0].getLexeme() == "hnova"
                && _tokens[1].getType() == TokenType::Number
@@ -135,13 +135,13 @@ bool Command::isHnova() const {
     }
     return false;
 }
-bool Command::isHrem() const {
+bool CommandFromString::isHrem() const {
     if (_tokens.size() == 1) {
         return _tokens[0].getLexeme() == "hrem";
     }
     return false;
 }
-bool Command::isZnew() const {
+bool CommandFromString::isZnew() const {
     if (_tokens.size() == 3) {
         return _tokens[0].getLexeme() == "znew"
                && _tokens[1].getType() == TokenType::Number
@@ -149,14 +149,14 @@ bool Command::isZnew() const {
     }
     return false;
 }
-bool Command::isZrem() const {
+bool CommandFromString::isZrem() const {
     if (_tokens.size() == 2) {
         return _tokens[0].getLexeme() == "zrem"
         && _tokens[1].getType() == TokenType::Number;
     }
     return false;
 }
-bool Command::isZlista() const {
+bool CommandFromString::isZlista() const {
     if (_tokens.size() == 1) {
         return _tokens[0].getLexeme() == "zlista";
     }
@@ -164,21 +164,21 @@ bool Command::isZlista() const {
 }
 
 // -------Commands to manage zones and their content-------
-bool Command::isZcomp() const {
+bool CommandFromString::isZcomp() const {
     if (_tokens.size() == 2) {
         return _tokens[0].getLexeme() == "zcomp"
                && _tokens[1].getType() == TokenType::Number;
     }
     return false;
 }
-bool Command::isZprops() const {
+bool CommandFromString::isZprops() const {
     if (_tokens.size() == 2) {
         return _tokens[0].getLexeme() == "zprops"
                && _tokens[1].getType() == TokenType::Number;
     }
     return false;
 }
-bool Command::isPmod() const {
+bool CommandFromString::isPmod() const {
     if (_tokens.size() == 4) {
         // FIXME: bool isPropertyNameValidAndExists = PropertyReferenceTable.count(_tokens[2].getLexeme());
 
@@ -190,7 +190,7 @@ bool Command::isPmod() const {
     return false;
 }
 //TODO
-bool Command::isCnew() const {
+bool CommandFromString::isCnew() const {
     //TODO: add devices support and check if device is in table bla bla bla
     if (_tokens.size() == 4) {
         return _tokens[0].getLexeme() == "cnew"
@@ -199,7 +199,7 @@ bool Command::isCnew() const {
     return false;
 }
 //TODO
-bool Command::isCrem() const {
+bool CommandFromString::isCrem() const {
     //TODO: add devices support and check if device is in table bla bla bla
     if (_tokens.size() == 4) {
         return _tokens[0].getLexeme() == "crem";
@@ -210,14 +210,14 @@ bool Command::isCrem() const {
 
 // -------Commands for rule processors-------
 //TODO:
-bool Command::isRnew() const {
+bool CommandFromString::isRnew() const {
     return false;
 }
 //TODO:
-bool Command::isPmuda() const {
+bool CommandFromString::isPmuda() const {
     return false;
 }
-bool Command::isRlista() const {
+bool CommandFromString::isRlista() const {
     if (_tokens.size() == 3) {
         return _tokens[0].getLexeme() == "rlista"
                && _tokens[1].getType() == TokenType::Number
@@ -225,7 +225,7 @@ bool Command::isRlista() const {
     }
     return false;
 }
-bool Command::isRrem() const {
+bool CommandFromString::isRrem() const {
     if (_tokens.size() == 4) {
         return _tokens[0].getLexeme() == "rrem"
                && _tokens[1].getType() == TokenType::Number
@@ -234,7 +234,7 @@ bool Command::isRrem() const {
     }
     return false;
 }
-bool Command::isAsoc() const {
+bool CommandFromString::isAsoc() const {
     if (_tokens.size() == 4) {
         return _tokens[0].getLexeme() == "asoc"
                && _tokens[1].getType() == TokenType::Number
@@ -243,7 +243,7 @@ bool Command::isAsoc() const {
     }
     return false;
 }
-bool Command::isAdes() const {
+bool CommandFromString::isAdes() const {
     if (_tokens.size() == 4) {
         return _tokens[0].getLexeme() == "ades"
                && _tokens[1].getType() == TokenType::Number
@@ -255,30 +255,30 @@ bool Command::isAdes() const {
 
 // -------Commands to interact with devices-------
 //TODO:
-bool Command::isAcom() const {
+bool CommandFromString::isAcom() const {
     return false;
 }
 
 // -------Commands for copying/retrieving rule processors--------
 //TODO:
-bool Command::isPsalva() const {
+bool CommandFromString::isPsalva() const {
     return false;
 }
-bool Command::isPrepoe() const {
+bool CommandFromString::isPrepoe() const {
     if (_tokens.size() == 2) {
         return _tokens[0].getLexeme() == "prepoe"
                && _tokens[1].getType() == TokenType::Keyword;
     }
     return false;
 }
-bool Command::isPrem() const {
+bool CommandFromString::isPrem() const {
     if (_tokens.size() == 2) {
         return _tokens[0].getLexeme() == "prem"
                && _tokens[1].getType() == TokenType::Keyword;
     }
     return false;
 }
-bool Command::isPlista() const {
+bool CommandFromString::isPlista() const {
     if (_tokens.size() == 1) {
         return _tokens[0].getLexeme() == "plista";
     }
@@ -287,20 +287,25 @@ bool Command::isPlista() const {
 
 // -------Additional general commands--------
 //TODO: File validation
-bool Command::isExec() const {
+bool CommandFromString::isExec() const {
     if (_tokens.size() == 2) {
-        return _tokens[0].getLexeme() == "exec"
+        bool isValidSequence = _tokens[0].getLexeme() == "exec"
                && _tokens[1].getType() == TokenType::Keyword;
+
+        std::ifstream inputFile(_tokens[1].getLexeme());
+
+        if (inputFile.is_open()) {
+            return isValidSequence;
+        }
     }
     return false;
 }
 
 // -------Special commands----------
-bool Command::isExit() const {
+bool CommandFromString::isExit() const {
     if(_tokens.size() == 1) {
         return _tokens[0].getLexeme() == "exit";
     }
     return false;
 }
 
-CommandsFromFile::CommandsFromFile() {}

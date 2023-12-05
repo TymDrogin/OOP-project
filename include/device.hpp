@@ -1,7 +1,7 @@
 #include "property.hpp"
 #include <memory>
 
-class Gadget {
+class Device {
 protected:
     bool _state;
 
