@@ -11,5 +11,7 @@ public:
     void processCommand(CommandFromString& command);
 
     void advance();
+private:
+    std::vector<Zone> _zones
 
 };
