@@ -11,8 +11,7 @@ App& App::instance() {
 }
 void App::run() {
 
-    //TODO: ADAT FOR LINUX
-    setTerminalDimensions(APP_WIDTH, APP_HEIGHT); // resize the CMD
+    setTerminalDimensions(APP_WIDTH, APP_HEIGHT);
 
     Terminal& trm = Terminal::instance();
     for(int i=1; i<25; i++) {
@@ -20,7 +19,28 @@ void App::run() {
     }
 
     Window console = Window(0, (APP_HEIGHT * 3) / 4, APP_WIDTH, APP_HEIGHT / 4, true);
+    Window logs = Window(APP_WIDTH / 2, 0, APP_WIDTH / 2, (APP_HEIGHT * 3) / 4, true);
+    //Window housingGridBorder = Window(0, 0, APP_WIDTH / 2, (APP_HEIGHT * 3) / 4, true);
 
+    //TODO: Simplify grid to a single window
+    Window* housingGrid[APP_HOUSING_ROWS][APP_HOUSING_COLUMNS];
+
+    for (int i = 0; i < APP_HOUSING_ROWS; ++i) {
+        for (int j = 0; j < APP_HOUSING_COLUMNS; ++j) {
+
+            //Position calculated using offset from the (0,0), window dimensions and window spacing
+            int windowPositionX = APP_HOUSING_OFFSET_X + i *(APP_HOUSING_TILE_WIDTH + APP_HOUSING_TILE_SPACING_X);
+            int windowPositionY = APP_HOUSING_OFFSET_Y + j *(APP_HOUSING_TILE_HEIGHT + APP_HOUSING_TILE_SPACING_Y);
+
+            int tileIndex = j * APP_HOUSING_COLUMNS + i;
+
+            housingGrid[i][j] = new Window{windowPositionX,
+                                           windowPositionY,
+                                           APP_HOUSING_TILE_WIDTH,
+                                           APP_HOUSING_TILE_HEIGHT};
+            housingGrid[i][j]->operator<<(set_color(tileIndex)).operator<<(tileIndex);
+        }
+    }
 
     while(true) {
         console.clear();
@@ -35,11 +55,10 @@ void App::run() {
         console.clear();
 
         if(Command(input).isValid()) {
-            console << set_color(2) << "Your command type is: " + processedInput;
-            getchar();
+            logs << set_color(2) << "Your command type is: " + processedInput + '\n';
         } else {
-            console << set_color(4) << "Your command type is: " + processedInput;
-            getchar();
+            logs << set_color(4) << "Your command type is: " + processedInput + '\n';
+            console << getchar();
         }
 
         if(processedInput == "exit") {
@@ -47,6 +66,10 @@ void App::run() {
         }
     }
 }
+
+
+
+
 void App::close() {
     //TODO: Autosave?
 }
