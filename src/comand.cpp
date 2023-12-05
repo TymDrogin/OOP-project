@@ -302,3 +302,5 @@ bool Command::isExit() const {
     }
     return false;
 }
+
+CommandsFromFile::CommandsFromFile() {}

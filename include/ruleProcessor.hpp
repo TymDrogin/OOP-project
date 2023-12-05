@@ -1,14 +1,14 @@
-//
-// Created by Tim on 11/20/2023.
-//
-
-#ifndef OOP_PROJECT_RULEPROCESSOR_HPP
-#define OOP_PROJECT_RULEPROCESSOR_HPP
+#pragma once
+#include "sensor.hpp"
 
 
-class RuleProcessor {
+#include <memory>
 
+class Rule {
+protected:
+    std::unique_ptr<Sensor> _sensor;
+    Rule(Sensor& sensor);
+
+public:
+    virtual bool evaluate() = 0;
 };
-
-
-#endif //OOP_PROJECT_RULEPROCESSOR_HPP

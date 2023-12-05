@@ -47,17 +47,26 @@ enum class CommandType {
     Exit
 };
 
+
+class AbstractCommand {
+    virtual bool isValid() const = 0;
+};
+
+
+
 class Command {
 public:
     Command(std::string command);
     bool isValid() const; // calls command type
     std::optional<CommandType> getCommandType() const;
+    std::string getCommandTypeAsString() const;
 
     std::vector<Token> getTokens() const;
-    std::string getCommandTypeAsString() const;
 
 private:
     std::vector<Token> _tokens;
+
+    //TODO: ADD INTERNAL TYPE STORAGE
 
     // -------Commands for simulated time-------
     bool isNext() const;
@@ -99,6 +108,18 @@ private:
 
     // -------Special commands----------
     bool isExit() const;
+};
+
+class CommandsFromFile {
+public:
+    CommandsFromFile(const std::string& filename);
 
 };
+
+
+
+
+
+
+
 

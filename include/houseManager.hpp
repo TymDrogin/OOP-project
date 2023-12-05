@@ -1,14 +1,15 @@
-//
-// Created by Tim on 11/20/2023.
-//
+#pragma once
 
-#ifndef OOP_PROJECT_HOUSEMANAGER_HPP
-#define OOP_PROJECT_HOUSEMANAGER_HPP
+#include "sensor.hpp"
+#include "command.hpp"
+#include "ruleProcessor.hpp"
+#include "zone.hpp"
 
+class HouseManager {
+public:
+    void processCommandFile();
+    void processCommand(Command& command);
 
-class houseManager {
+    void advance();
 
 };
-
-
-#endif //OOP_PROJECT_HOUSEMANAGER_HPP

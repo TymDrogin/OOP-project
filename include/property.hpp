@@ -15,7 +15,6 @@ enum class PropertyType {
     Sound
 };
 
-
 class PropertyReference {
 protected:
     const std::string _name;
@@ -26,8 +25,6 @@ protected:
     PropertyReference(const std::string name, const std::string units, const int min, const int max);
 
 public:
-
-
     std::string getName() const;
     std::string getUnits() const;
     int getMax() const;
