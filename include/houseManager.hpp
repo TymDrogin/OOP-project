@@ -7,11 +7,14 @@
 
 class HouseManager {
 public:
-    void processCommandFile();
-    void processCommand(CommandFromString& command);
+    void processCommandsFromFile(CommandFromFile& command);
+    void processCommandFromString(CommandFromString& command);
 
     void advance();
 private:
-    std::vector<Zone> _zones
+    std::vector<Zone> _zones;
 
+    void hRem(); // uses destructor for all the parts of house
+    void zNew(); // creates new zone in the position
 };
+
