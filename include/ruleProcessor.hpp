@@ -1,14 +1,53 @@
-//
-// Created by Tim on 11/20/2023.
-//
+#pragma once
+#include "sensor.hpp"
+#include "device.hpp"
 
-#ifndef OOP_PROJECT_RULEPROCESSOR_HPP
-#define OOP_PROJECT_RULEPROCESSOR_HPP
+
+#include <memory>
 
 
 class RuleProcessor {
 
+
+
+
 };
 
 
-#endif //OOP_PROJECT_RULEPROCESSOR_HPP
+
+
+
+class Rule {
+protected:
+
+    Rule(Sensor& sensor);
+
+public:
+    virtual bool evaluate() = 0;
+};
+
+
+
+class EqualTo : private Rule {
+
+};
+
+class LessThen : private Rule {
+
+};
+
+class BiggerThen : private Rule {
+
+};
+
+class InBetween : private Rule {
+
+};
+
+class Outside : private Rule {
+
+};
+
+
+
+

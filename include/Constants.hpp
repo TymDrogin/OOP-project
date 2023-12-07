@@ -24,3 +24,6 @@ constexpr int APP_HOUSING_TILE_SPACING_Y = 0;
 // APP SETTINGS
 constexpr int APP_WIDTH = 80;
 constexpr int APP_HEIGHT = 24;
+
+// Used in property
+constexpr int DEFAULT_VALUE = -1;

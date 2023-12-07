@@ -19,11 +19,11 @@ int main() {
 
 
     std::string input = "advance 20 20";
-    Command command(input);
+    CommandFromString command(input);
     printTokens(command.getTokens());
 
     std::optional<CommandType> cmdt = command.getCommandType();
-    std::cout << "Value: " << Command::commandTypeToString(cmdt) << std::endl;
+    std::cout << "Value: " << CommandFromString::commandTypeToString(cmdt) << std::endl;
 }
 
 
@@ -34,7 +34,7 @@ int main() {
     auto start = std::chrono::high_resolution_clock::now();
 
     std::string input = "plista puta";
-    Command command(input);
+    CommandFromString command(input);
     printTokens(command.getTokens());
 
     auto stop = std::chrono::high_resolution_clock::now();

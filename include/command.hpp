@@ -2,7 +2,10 @@
 
 #include "lexer.hpp"
 #include "property.hpp"
-#include "optional"
+#include <optional>
+#include <iostream>
+#include <fstream>
+
 
 enum class CommandType {
     // -------Commands for simulated time-------
@@ -47,9 +50,9 @@ enum class CommandType {
     Exit
 };
 
-class Command {
+class CommandFromString : {
 public:
-    Command(std::string command);
+    CommandFromString(std::string command);
     bool isValid() const; // calls command type
     std::optional<CommandType> getCommandType() const;
 
@@ -99,5 +102,20 @@ private:
 
     // -------Special commands----------
     bool isExit() const;
+
 };
 
+class CommandFromFile {
+public:
+    CommandFromFile(const std::string& filename);
+
+    bool isValid();
+    std::vector<std::optional<CommandType>> getCommandTypes();
+
+    std::vector<std::vector<Token>> getTokenMatrix();
+
+    std::vector<std::string> getCommandsTypesAsStrings();
+
+private:
+    std::vector<std::vector<Token>> _tokensMatrix
+};

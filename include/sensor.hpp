@@ -1,14 +1,13 @@
-//
-// Created by Tim on 11/20/2023.
-//
-
-#ifndef OOP_PROJECT_SENSOR_HPP
-#define OOP_PROJECT_SENSOR_HPP
+#pragma once
+#include "property.hpp"
+#include "memory"
 
 
 class Sensor {
-
+public:
+    Sensor(std::shared_ptr<std::map<PropertyType, int>> propertyMap);
+    virtual float readValue();
+protected:
+    std::shared_ptr<std::map<PropertyType, int>> _propertyMap;
 };
 
-
-#endif //OOP_PROJECT_SENSOR_HPP

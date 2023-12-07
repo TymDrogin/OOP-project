@@ -1,14 +1,23 @@
-//
-// Created by Tim on 11/20/2023.
-//
+#pragma once
+#include "sensor.hpp"
+#include "ruleProcessor.hpp"
+#include "property.hpp"
 
-#ifndef OOP_PROJECT_ZONE_HPP
-#define OOP_PROJECT_ZONE_HPP
+#include <vector>
+#include <map>
 
+// TODO: Default initializer for the property
+// Conditional delete of zones
+// Add global ID counter as SINGLETONE
 
 class Zone {
+private:
+    std::vector<Sensor> _sensors;
+    std::map<PropertyType, float> _properties;
+    std::vector<Device> _devises;
+
+    //FIXME std::vector<Rule> _rules;
+
+    RuleProcessor _ruleProcessor;
 
 };
-
-
-#endif //OOP_PROJECT_ZONE_HPP
