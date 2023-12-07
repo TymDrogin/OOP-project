@@ -14,13 +14,14 @@ void App::run() {
     setTerminalDimensions(APP_WIDTH, APP_HEIGHT);
 
     Terminal& trm = Terminal::instance();
+    
     for(int i=1; i<25; i++) {
         trm.init_color(i, i, 0);
     }
 
     Window console = Window(0, (APP_HEIGHT * 3) / 4, APP_WIDTH, APP_HEIGHT / 4, true);
     Window logs = Window(APP_WIDTH / 2, 0, APP_WIDTH / 2, (APP_HEIGHT * 3) / 4, true);
-    //Window housingGridBorder = Window(0, 0, APP_WIDTH / 2, (APP_HEIGHT * 3) / 4, true);
+    Window housing = Window(0, 0, APP_WIDTH / 2, (APP_HEIGHT * 3) / 4, true);
 
     while(true) {
         console.clear();

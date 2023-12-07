@@ -5,6 +5,4 @@ int main() {
 
     App::instance().run();
     return 0;
-
-    // Пересмотреть порядок вызовов. П
 }

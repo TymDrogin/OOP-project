@@ -6,17 +6,6 @@
 #include <memory>
 
 
-class RuleProcessor {
-
-
-
-
-};
-
-
-
-
-
 class Rule {
 protected:
 
