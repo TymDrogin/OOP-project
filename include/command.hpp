@@ -50,7 +50,7 @@ enum class CommandType {
     Exit
 };
 
-class CommandFromString : {
+class CommandFromString {
 public:
     CommandFromString(std::string command);
     bool isValid() const; // calls command type
@@ -117,5 +117,5 @@ public:
     std::vector<std::string> getCommandsTypesAsStrings();
 
 private:
-    std::vector<std::vector<Token>> _tokensMatrix
+    std::vector<std::vector<Token>> _tokensMatrix;
 };

@@ -10,11 +10,12 @@ class Rule {
 protected:
 
     Rule(Sensor& sensor);
+    std::unique_ptr<Device> _device;
+    std::unique_ptr<Sensor> _sensor;
 
 public:
     virtual bool evaluate() = 0;
 };
-
 
 
 class EqualTo : private Rule {
