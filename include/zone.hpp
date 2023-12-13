@@ -15,9 +15,11 @@ private:
     std::vector<Sensor> _sensors;
     std::map<PropertyType, float> _properties;
     std::vector<Device> _devises;
-
-    //FIXME std::vector<Rule> _rules;
+    std::vector<Rule> _rules;
 
     RuleProcessor _ruleProcessor;
+
+public:
+    Zone();
 
 };
