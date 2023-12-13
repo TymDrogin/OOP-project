@@ -21,5 +21,4 @@ private:
 
 public:
     Zone();
-
 };

@@ -41,10 +41,10 @@ class Outside : private Rule {
 
 class RuleProcessor {
 private:
-    std::vector<Rule>* _rules;
+    std::unique_ptr<std::vector<Rule>> _rules;
 
 public:
-    RuleProcessor(std::vector<Rule>* rules);
+    RuleProcessor(std::unique_ptr<std::vector<Rule>> rules);
 
     void process();
 };
