@@ -5,3 +5,4 @@
 
 #include "command.hpp"
 #include "app.hpp"
+#include "ruleProcessor.hpp"

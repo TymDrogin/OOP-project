@@ -1,5 +1,9 @@
 #include "ruleProcessor.hpp"
 
-RuleProcessor::RuleProcessor(std::unique_ptr<std::vector<Rule>> rules) : _rules(std::move(rules)) {
+RuleProcessor::RuleProcessor(std::vector<Rule>* rules_ptr) : _rules(rules_ptr){
+
+}
+
+void RuleProcessor::process() {
 
 }

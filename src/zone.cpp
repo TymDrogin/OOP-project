@@ -1,5 +1,5 @@
 #include "zone.hpp"
 
-Zone::Zone() : _ruleProcessor(){
+Zone::Zone() : _ruleProcessor(&_rules) {
 
 }

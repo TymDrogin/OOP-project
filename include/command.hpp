@@ -50,9 +50,9 @@ enum class CommandType {
     Exit
 };
 
-class CommandFromString {
+class Command {
 public:
-    CommandFromString(std::string command);
+    Command(std::string command);
     bool isValid() const; // calls command type
     std::optional<CommandType> getCommandType() const;
 

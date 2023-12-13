@@ -5,9 +5,12 @@
 
 class Sensor {
 public:
-    Sensor(std::shared_ptr<std::map<PropertyType, int>> propertyMap);
-    virtual float readValue();
-protected:
-    std::shared_ptr<std::map<PropertyType, int>> _propertyMap;
+    Sensor(std::map<PropertyType, int>& propertyMap, PropertyType readValueType);
+    float readValue();
+
+private:
+    std::map<PropertyType, int>& _propertyMap;
+
+    PropertyType _readValueType;
 };
 
