@@ -53,6 +53,8 @@ enum class CommandType {
 class Command {
 public:
     Command(std::string command);
+    Command(std::vector<Token>);
+
     bool isValid() const; // calls command type
     std::optional<CommandType> getCommandType() const;
 
@@ -107,7 +109,7 @@ private:
 
 class CommandFromFile {
 public:
-    CommandFromFile(const std::string& filename);
+    CommandFromFile(const std::string filename);
 
     bool isValid();
     std::vector<std::optional<CommandType>> getCommandTypes();

@@ -15,9 +15,11 @@ private:
     std::vector<Sensor> _sensors;
     std::map<PropertyType, float> _properties;
     std::vector<Device> _devises;
-    std::vector<Rule> _rules;
+    std::vector<std::unique_ptr<Rule>> _rules;
 
     RuleProcessor _ruleProcessor;
+
+    void initializeProperties(); // Used to set default values
 
 public:
     Zone();

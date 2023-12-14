@@ -9,8 +9,8 @@
 class Rule {
 protected:
     Rule(Sensor& sensor, Device& device);
-    std::unique_ptr<Device> _device;
-    std::unique_ptr<Sensor> _sensor;
+    Device& _device;
+    Sensor& _sensor;
 
 public:
     virtual void evaluate() = 0;
@@ -50,10 +50,10 @@ public:
 
 class RuleProcessor {
 private:
-    std::vector<Rule>* _rules;
+    std::vector<std::unique_ptr<Rule>>& _rules;
 
 public:
-    explicit RuleProcessor(std::vector<Rule>* rules_ptr);
+    explicit RuleProcessor(std::vector<std::unique_ptr<Rule>>& rules_ref);
 
     void process();
 };

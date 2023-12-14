@@ -4,6 +4,7 @@ Command::Command(std::string command) {
     Lexer lexer(command);
     _tokens = lexer.tokenize();
 }
+Command::Command(std::vector<Token> tokens) : _tokens(tokens){}
 
 bool Command::isValid() const {
     return static_cast<bool>(getCommandType());
@@ -309,3 +310,55 @@ bool Command::isExit() const {
     return false;
 }
 
+CommandFromFile::CommandFromFile(const std::string filename) {
+    std::string filenameWithPath = "user-commands/" + filename;
+
+    std::ifstream inputFile(filenameWithPath);
+    if (!inputFile.is_open()) {
+        throw std::logic_error("Invalid file were given");
+    }
+
+    std::string line;
+    while (std::getline(inputFile, line)) {
+        auto tokens = Command(line).getTokens();
+        _tokensMatrix.push_back(tokens);
+    }
+
+    inputFile.close();
+}
+
+bool CommandFromFile::isValid() {
+    for(auto line : _tokensMatrix) {
+        bool isValidCommand = Command(line).isValid();
+        if(!isValidCommand) {
+            return false;
+        }
+    }
+    return true;
+}
+
+std::vector<std::optional<CommandType>> CommandFromFile::getCommandTypes() {
+    std::vector<std::optional<CommandType>> commandTypes;
+
+    for(auto line : _tokensMatrix) {
+        std::optional<CommandType> currentCommandType = Command(line).getCommandType();
+
+        commandTypes.push_back(currentCommandType);
+    }
+    return commandTypes;
+}
+
+std::vector<std::vector<Token>> CommandFromFile::getTokenMatrix() {
+    return _tokensMatrix;
+}
+
+std::vector<std::string> CommandFromFile::getCommandsTypesAsStrings() {
+    std::vector<std::string> typesAsStrings;
+
+    for(auto line : _tokensMatrix) {
+        std::string currentTypeAsString = Command(line).getCommandTypeAsString();
+
+        typesAsStrings.push_back(currentTypeAsString);
+    }
+    return typesAsStrings;
+}

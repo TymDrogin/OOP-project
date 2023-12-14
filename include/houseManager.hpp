@@ -7,8 +7,8 @@
 
 class HouseManager {
 public:
-    void processCommandsFromFile(CommandFromFile& command);
-    void processCommandFromString(Command& command);
+    void processCommand(Command cmd);
+    void processCommandsFromFile(CommandFromFile cmd);
 
     void advance();
 private:

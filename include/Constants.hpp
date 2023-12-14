@@ -27,3 +27,13 @@ constexpr int APP_HEIGHT = 24;
 
 // Used in property
 constexpr int DEFAULT_VALUE = -1;
+
+// Default zone properties
+constexpr int ZONE_DEFAULT_TEMPERATURE = 25;
+constexpr int ZONE_DEFAULT_LIGHT = 0;
+constexpr int ZONE_DEFAULT_RADIATION = 0;
+constexpr int ZONE_DEFAULT_VIBRATION = 0;
+constexpr int ZONE_DEFAULT_HUMIDITY = 0;
+constexpr int ZONE_DEFAULT_SMOKE = 0;
+constexpr int ZONE_DEFAULT_SOUND = 0;
+
