@@ -19,9 +19,9 @@ private:
     std::vector<std::unique_ptr<Rule>> _rules;
     const int _ID;
 
-    IDGeneator _sensorIDGenerator;
-    IDGeneator _deviceIDGenerator;
-    IDGeneator _ruleIDGenerator;
+    IDGenerator _sensorIDGenerator;
+    IDGenerator _deviceIDGenerator;
+    IDGenerator _ruleIDGenerator;
 
     RuleProcessor _ruleProcessor;
 
@@ -29,4 +29,6 @@ private:
 
 public:
     Zone(const int ID);
+
+    void nextStep();
 };

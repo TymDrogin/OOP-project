@@ -13,3 +13,15 @@ void HouseManager::processCommand(Command cmd) {
     }
 }
 
+void HouseManager::next() {
+    for(auto zone : _zones) {
+        zone.nextStep();
+    }
+}
+
+void HouseManager::advance(int steps) {
+    for(int i = 0; i < steps; i++) {
+        next();
+    }
+}
+

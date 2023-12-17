@@ -4,6 +4,7 @@
 #include "command.hpp"
 #include "ruleProcessor.hpp"
 #include "zone.hpp"
+#include "utils.hpp"
 
 class HouseManager {
 public:
@@ -13,6 +14,8 @@ public:
 
 private:
     std::vector<Zone> _zones;
+    IDGenerator _ZoneIDGenerator;
+
     void next();
     void advance(int steps);
 
