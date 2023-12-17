@@ -13,7 +13,8 @@ file(GLOB SOURCES "src/*.cpp")
 file(GLOB LIB_SOURCES "lib/*.cpp")
 
 # Add all source files to the executable
-add_executable(${PROJECT_NAME} ${SOURCES} ${LIB_SOURCES})
+add_executable(${PROJECT_NAME} ${SOURCES} ${LIB_SOURCES}
+        src/utils.cpp)
 
 # Link the executable with the pdcurses library
 target_link_libraries(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/lib/pdcurses.a")

@@ -1,6 +1,6 @@
 #include "zone.hpp"
 #include "Constants.hpp"
-Zone::Zone() : _ruleProcessor(_rules) {
+Zone::Zone(const int ID) : _ruleProcessor(_rules) , _ID(ID) {
     initializeProperties();
 }
 

@@ -1,10 +1,10 @@
 #include "sensor.hpp"
 
-Sensor::Sensor(std::map<PropertyType, int>& propertyMap, PropertyType readValueType)
-        : _propertyMap(propertyMap), _readValueType(readValueType) {
+Sensor::Sensor(const int ID, std::map<PropertyType, int>& propertyMap, PropertyType readValueType)
+        :  _ID(ID), _propertyMap(propertyMap), _readValueType(readValueType) {
 }
 
 
-float Sensor::readValue() {
+int Sensor::readValue() {
     return _propertyMap[_readValueType];
 }

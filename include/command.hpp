@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Constants.hpp"
 #include "lexer.hpp"
 #include "property.hpp"
 #include <optional>

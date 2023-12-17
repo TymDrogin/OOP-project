@@ -311,7 +311,7 @@ bool Command::isExit() const {
 }
 
 CommandFromFile::CommandFromFile(const std::string filename) {
-    std::string filenameWithPath = "user-commands/" + filename;
+    std::string filenameWithPath = USER_COMMANDS_DIRECTORY_PREFIX + filename;
 
     std::ifstream inputFile(filenameWithPath);
     if (!inputFile.is_open()) {

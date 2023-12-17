@@ -5,12 +5,14 @@
 
 class Sensor {
 public:
-    Sensor(std::map<PropertyType, int>& propertyMap, PropertyType readValueType);
-    float readValue();
+    Sensor(const int ID, std::map<PropertyType, int>& propertyMap, PropertyType readValueType);
+    int readValue();
 
 private:
     std::map<PropertyType, int>& _propertyMap;
 
     PropertyType _readValueType;
+
+    const int _ID;
 };
 
