@@ -1,6 +1,6 @@
 #include "ruleProcessor.hpp"
 
-Rule::Rule(Sensor &sensor, Device &device) : _sensor(sensor), _device(device) {}
+Rule::Rule(int ID, Sensor &sensor, Device &device) : _ID(ID), _sensor(sensor), _device(device) {}
 
 
 RuleProcessor::RuleProcessor(std::vector<std::unique_ptr<Rule>>& rules_ref) : _rules(rules_ref){}

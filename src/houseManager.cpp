@@ -14,8 +14,8 @@ void HouseManager::processCommand(Command cmd) {
 }
 
 void HouseManager::next() {
-    for(auto zone : _zones) {
-        zone.nextStep();
+    for(auto &zone : _zones) {
+        zone->nextStep();
     }
 }
 
@@ -23,5 +23,16 @@ void HouseManager::advance(int steps) {
     for(int i = 0; i < steps; i++) {
         next();
     }
+}
+
+void HouseManager::hRem() {
+    _zones.clear();
+}
+
+void HouseManager::zNew(int pos_x, int pos_y) {
+    int index = pos_y * _zonesDimension_H + pos_x;
+    int zoneID = _ZoneIDGenerator.getUnique();
+
+    _zones[index] = std::make_unique<Zone>(zoneID);
 }
 

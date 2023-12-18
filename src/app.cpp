@@ -36,15 +36,15 @@ void App::run() {
         console.clear();
 
         if(Command(input).isValid()) {
+            if(processedInput == "exit") {
+                App::instance().close();
+            }
+
             console << set_color(2) << "Your command type is: " + processedInput + '\n';
             getchar();
         } else {
             console << set_color(4) << "Your command type is: " + processedInput + '\n';
             getchar();
-        }
-
-        if(processedInput == "exit") {
-            App::instance().close();
         }
     }
 }

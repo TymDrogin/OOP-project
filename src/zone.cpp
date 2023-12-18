@@ -1,6 +1,6 @@
 #include "zone.hpp"
 #include "Constants.hpp"
-Zone::Zone(const int ID) : _ruleProcessor(_rules) , _ID(ID) {
+Zone::Zone(int ID) : _ruleProcessor(_rules) , _ID(ID) {
     initializeProperties();
 }
 
@@ -16,4 +16,8 @@ void Zone::initializeProperties() {
         _properties[PropertyType::Sound] = ZONE_DEFAULT_SOUND;
         callCounter++;
     }
+}
+
+void Zone::nextStep() {
+
 }

@@ -8,7 +8,7 @@
 
 class Rule {
 protected:
-    Rule(const int ID, Sensor& sensor, Device& device);
+    Rule(int ID, Sensor& sensor, Device& device);
     Device& _device;
     Sensor& _sensor;
     const int _ID;

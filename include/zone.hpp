@@ -18,7 +18,6 @@ private:
     std::vector<Device> _devises;
     std::vector<std::unique_ptr<Rule>> _rules;
     const int _ID;
-
     IDGenerator _sensorIDGenerator;
     IDGenerator _deviceIDGenerator;
     IDGenerator _ruleIDGenerator;
@@ -28,7 +27,7 @@ private:
     void initializeProperties(); // Used to set default values
 
 public:
-    Zone(const int ID);
+    Zone(int ID);
 
     void nextStep();
 };
