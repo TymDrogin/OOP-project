@@ -17,12 +17,14 @@ private:
     std::map<PropertyType, int> _properties;
     std::vector<Device> _devises;
     std::vector<std::unique_ptr<Rule>> _rules;
+
+    RuleProcessor _ruleProcessor;
+
     const int _ID;
+
     IDGenerator _sensorIDGenerator;
     IDGenerator _deviceIDGenerator;
     IDGenerator _ruleIDGenerator;
-
-    RuleProcessor _ruleProcessor;
 
     void initializeProperties(); // Used to set default values
 
