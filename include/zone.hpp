@@ -31,5 +31,5 @@ private:
 public:
     Zone(int ID);
 
-    void nextStep();
+    void nextSimulationStep();
 };

@@ -18,6 +18,11 @@ void Zone::initializeProperties() {
     }
 }
 
-void Zone::nextStep() {
+void Zone::nextSimulationStep() {
+    for(auto sensor : _devises) {
 
+    }
+    for(auto &rule : _rules) {
+
+    }
 }

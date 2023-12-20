@@ -15,7 +15,7 @@ void HouseManager::processCommand(Command cmd) {
 
 void HouseManager::next() {
     for(auto &zone : _zones) {
-        zone->nextStep();
+        zone->nextSimulationStep();
     }
 }
 
