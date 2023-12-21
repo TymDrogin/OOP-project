@@ -21,12 +21,12 @@ private:
 
     // -------Commands for simulated time-------
     void next();
-    void advance(int steps);
+    void advance(Command& cmd);
 
     // -------Commands for managing housing and zones------
 
-
+    void hNova(Command& cmd);
     void hRem(); // uses destructor for all the parts of house
-    void zNew(int pos_x, int pos_y); // creates new zone in the position
+    void zNew(Command& cmd); // creates new zone in the position
 };
 

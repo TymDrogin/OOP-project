@@ -9,7 +9,14 @@ void HouseManager::processCommand(Command cmd) {
     CommandType cmdType = cmd.getCommandType().value();
 
     switch (cmdType) {
-
+        case CommandType::Next:
+            next();
+            break;
+        case CommandType::Advance:
+            advance(cmd);
+            break;
+        case CommandType::Hnova:
+            break;
     }
 }
 
@@ -19,17 +26,21 @@ void HouseManager::next() {
     }
 }
 
-void HouseManager::advance(int steps) {
+void HouseManager::advance(Command& cmd) {
+    int steps = std::stoi(cmd.getTokens()[1].getLexeme());
     for(int i = 0; i < steps; i++) {
         next();
     }
 }
 
+
 void HouseManager::hRem() {
     _zones.clear();
 }
 
-void HouseManager::zNew(int pos_x, int pos_y) {
+void HouseManager::zNew(Command& cmd) {
+    int pos_y;
+    int pos_x;
     int index = pos_y * _zonesDimension_H + pos_x;
     int zoneID = _ZoneIDGenerator.getUnique();
 
