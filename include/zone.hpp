@@ -31,5 +31,6 @@ private:
 public:
     Zone(int ID);
 
+    int getID() const;
     void nextSimulationStep();
 };

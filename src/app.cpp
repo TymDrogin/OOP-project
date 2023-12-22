@@ -25,7 +25,6 @@ void App::run() {
 
     while(true) {
         console.clear();
-
         console << set_color(0) << "House-sim>>> ";
 
         getchar();
@@ -36,10 +35,6 @@ void App::run() {
         console.clear();
 
         if(Command(input).isValid()) {
-            if(processedInput == "exit") {
-                App::instance().close();
-            }
-
             console << set_color(2) << "Your command type is: " + processedInput + '\n';
             getchar();
         } else {
@@ -53,7 +48,7 @@ void App::run() {
 
 
 void App::close() {
-    //TODO: Autosave?
+    Terminal::instance().clear();
 }
 
 void App::setTerminalDimensions(int x, int y) {
@@ -72,4 +67,6 @@ void App::setTerminalDimensions(int x, int y) {
     callCounter = callCounter + 1;
 #endif
 }
+
+
 

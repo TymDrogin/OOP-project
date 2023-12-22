@@ -18,6 +18,9 @@ void Zone::initializeProperties() {
     }
 }
 
+
+int Zone::getID() const {return _ID;};
+
 void Zone::nextSimulationStep() {
     for(auto sensor : _devises) {
 

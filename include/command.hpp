@@ -114,6 +114,7 @@ public:
 
     bool isValid();
     std::vector<std::optional<CommandType>> getCommandTypes();
+    std::vector<Command> getCommands();
 
     std::vector<std::vector<Token>> getTokenMatrix();
 

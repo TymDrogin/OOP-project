@@ -181,11 +181,10 @@ bool Command::isZprops() const {
 }
 bool Command::isPmod() const {
     if (_tokens.size() == 4) {
-        // FIXME: bool isPropertyNameValidAndExists = PropertyReferenceTable.count(_tokens[2].getLexeme());
-
+        // TODO: ADD VALIDATION
         return _tokens[0].getLexeme() == "pmod"
                && _tokens[1].getType() == TokenType::Number
-               //&& isPropertyNameValidAndExists
+               && _tokens[2].getType() == TokenType::Keyword
                && _tokens[3].getType() == TokenType::Number;
     }
     return false;
@@ -346,6 +345,15 @@ std::vector<std::optional<CommandType>> CommandFromFile::getCommandTypes() {
         commandTypes.push_back(currentCommandType);
     }
     return commandTypes;
+}
+std::vector<Command> CommandFromFile::getCommands() {
+    std::vector<Command> commands;
+
+    for(auto line : _tokensMatrix) {
+        Command currentCommand(line);
+        commands.push_back(currentCommand);
+    }
+    return commands;
 }
 
 std::vector<std::vector<Token>> CommandFromFile::getTokenMatrix() {
