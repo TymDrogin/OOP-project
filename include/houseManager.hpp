@@ -13,13 +13,15 @@ class HouseManager {
 public:
     void processCommand(Command cmd);
     void processCommandsFromFile(CommandFromFile cmd);
+    void displayData() const;
 
-
-    void displayData(term::Window& window) const;
-
+    HouseManager(term::Window& logs, term::Window& housing);
 private:
     std::vector<std::unique_ptr<Zone>> _zones;
     IDGenerator _ZoneIDGenerator;
+    term::Window& _logsWindow;
+    term::Window& _housingWindow;
+
 
     int getZoneIndex(int posX, int posY);
 

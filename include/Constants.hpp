@@ -37,6 +37,10 @@ constexpr int ZONE_DEFAULT_HUMIDITY = 0;
 constexpr int ZONE_DEFAULT_SMOKE = 0;
 constexpr int ZONE_DEFAULT_SOUND = 0;
 
-// File processin
-constexpr std::string USER_COMMANDS_DIRECTORY_PREFIX = "user-commands/";
+// Gadgets related controls
+
+
+
+// File processing related
+const std::string USER_COMMANDS_DIRECTORY_PREFIX = "user-commands/";
 

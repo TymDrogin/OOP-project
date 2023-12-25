@@ -15,7 +15,7 @@ class Zone {
 private:
     std::vector<Sensor> _sensors;
     std::map<PropertyType, int> _properties;
-    std::vector<Device> _devises;
+    std::vector<std::unique_ptr<Device>> _devises;
     std::vector<std::unique_ptr<Rule>> _rules;
 
     RuleProcessor _ruleProcessor;
