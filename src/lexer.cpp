@@ -79,7 +79,7 @@ Token Lexer::parseNumber() {
 Token Lexer::parseIdentifier() {
 	std::string lexeme;
 
-	while (isalpha(getCurrentChar()) || isdigit(getCurrentChar())) {
+	while (isalpha(getCurrentChar()) || isdigit(getCurrentChar()) || getCurrentChar() == '.') {
 		lexeme += getCurrentChar();
 		advance();
 	}

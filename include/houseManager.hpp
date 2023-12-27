@@ -12,18 +12,19 @@
 class HouseManager {
 public:
     void processCommand(Command cmd);
-    void processCommandsFromFile(CommandFromFile cmd);
-    void displayData() const;
 
     HouseManager(term::Window& logs, term::Window& housing);
 private:
     std::vector<std::unique_ptr<Zone>> _zones;
     IDGenerator _ZoneIDGenerator;
+
+    // In order to kee
     term::Window& _logsWindow;
     term::Window& _housingWindow;
 
 
     int getZoneIndex(int posX, int posY);
+    void displayZonesData(term::Window& win);
 
     int _zonesDimension_W, _zonesDimension_H;
 
@@ -63,5 +64,8 @@ private:
     void pRepoe();
     void pRem();
     void pLista();
+
+    // -------Additional general commands--------
+    void exec(Command& cmd);
 };
 

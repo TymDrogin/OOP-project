@@ -23,11 +23,11 @@ void App::run() {
     Window logs = Window(APP_WIDTH / 2, 0, APP_WIDTH / 2, (APP_HEIGHT * 3) / 4, true);
     Window housing = Window(0, 0, APP_WIDTH / 2, (APP_HEIGHT * 3) / 4, true);
 
+    HouseManager house(logs, housing);
+
     while(true) {
         console.clear();
         console << set_color(0) << "House-sim>>> ";
-
-        getchar();
         std::string input;
         console << set_color(2) >> input;
 
@@ -36,6 +36,8 @@ void App::run() {
 
         if(Command(input).isValid()) {
             console << set_color(2) << "Your command type is: " + processedInput + '\n';
+
+            house.processCommand(Command(input));
             getchar();
         } else {
             console << set_color(4) << "Your command type is: " + processedInput + '\n';

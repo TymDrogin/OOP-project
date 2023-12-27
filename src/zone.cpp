@@ -20,12 +20,25 @@ void Zone::initializeProperties() {
 
 
 int Zone::getID() const {return _ID;};
+int Zone::getNumSensors() const {
+    return _sensors.size();
+}
+
+int Zone::getNumDevices() const {
+    return _devises.size();
+}
+
+int Zone::getNumRules() const {
+    return _rules.size();
+}
+
 
 void Zone::nextSimulationStep() {
-    for(auto sensor : _devises) {
-
+    for(auto &device : _devises) {
+        device->work();
     }
     for(auto &rule : _rules) {
-
+        rule->evaluate();
     }
 }
+

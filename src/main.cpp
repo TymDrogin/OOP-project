@@ -3,6 +3,5 @@
 
 int main() {
 
-    std::string filename = "cmd1.txt";
     App::instance().run();
 }

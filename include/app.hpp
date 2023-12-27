@@ -4,7 +4,9 @@
 // Every part together
 #include "Constants.hpp"
 #include "command.hpp"
+#include "houseManager.hpp"
 #include "../lib/Terminal.h"
+
 
 
 using namespace term;

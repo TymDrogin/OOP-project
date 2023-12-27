@@ -1,6 +1,7 @@
 #include "houseManager.hpp"
 /* Public */
 
+
 HouseManager::HouseManager(term::Window &logs, term::Window &housing) : _logsWindow(logs), _housingWindow(housing) {};
 
 
@@ -60,24 +61,27 @@ void HouseManager::processCommand(Command cmd) {
 // -------Commands to interact with devices-------
 // -------Commands for copying/retrieving rule processors--------
 
+// -------Additional general commands--------
+        case CommandType::Exec:
+            exec(cmd);
+            break;
+
+        default:
+            break;
 
 
     }
 }
-void HouseManager::processCommandsFromFile(CommandFromFile cmd) {
-    for (auto command : cmd.getCommands()) {
-        processCommand(command);
+
+void HouseManager::displayZonesData(term::Window& win) {
+    for (auto &zone : _zones) {
+        win << term::set_color(2) << "ID: " << zone->getID()           << term::set_color(0) << ", ";
+        win << term::set_color(3) << "Sens:  "<< zone->getNumSensors() << term::set_color(0) << ", ";
+        win << term::set_color(4) << "Rules: "<< zone->getNumRules()   << term::set_color(0) << ", ";
+        win << term::set_color(5) << "Devs: "<< zone->getNumDevices();
+
+        win << '\n';
     }
-}
-void HouseManager::displayData() const {
-  for(int rows = 0; rows < _zonesDimension_W; rows++){
-
-
-
-      for(int columns = 0; columns < _zonesDimension_H; columns++) {
-
-      }
-  }
 };
 
 
@@ -102,11 +106,11 @@ void HouseManager::advance(Command& cmd) {
 
 // -------Commands for managing housing and zones------
 void HouseManager::hNova(Command &cmd) {
-    int rows = std::stoi(cmd.getTokens()[1].getLexeme());
-    int columns = std::stoi(cmd.getTokens()[2].getLexeme());
+    _zonesDimension_H = std::stoi(cmd.getTokens()[1].getLexeme());
+    _zonesDimension_W = std::stoi(cmd.getTokens()[2].getLexeme());
 
     _zones.clear();
-    for (int i = 0; i < rows * columns; i++) {
+    for (int i = 0; i < _zonesDimension_W * _zonesDimension_H; i++) {
         int zoneID = _ZoneIDGenerator.getUnique();
         _zones.emplace_back(std::make_unique<Zone>(zoneID));
     }
@@ -136,9 +140,98 @@ void HouseManager::zRem(Command &cmd) {
         }
     }
 }
-void HouseManager::zLista() {}
+void HouseManager::zLista() {
+    displayZonesData(_logsWindow);
+}
 
-// -------Commands to manage zones and their content-------
+void HouseManager::zComp(Command &cmd) {
+
+}
+
+void HouseManager::zProps(Command &cmd) {
+
+}
+
+void HouseManager::pMod(Command &cmd) {
+
+}
+
+void HouseManager::cNew(Command &cmd) {
+
+}
+
+void HouseManager::cRem(Command &cmd) {
+
+}
+
+void HouseManager::rNew() {
+
+}
+
+void HouseManager::pMuda() {
+
+}
+
+void HouseManager::rLista() {
+
+}
+
+void HouseManager::rRem() {
+
+}
+
+void HouseManager::aSoc() {
+
+}
+
+void HouseManager::aDes() {
+
+}
+
+bool HouseManager::aCom() const {
+    return false;
+}
+
+void HouseManager::pSalva() {
+
+}
+
+void HouseManager::pRepoe() {
+
+}
+
+void HouseManager::pRem() {
+
+}
+
+void HouseManager::pLista() {
+
+}
+
+// -------Commands to manage zones and their content-------expression
+
+
+
+
+
+
+// -------Additional general commands--------
+void HouseManager::exec(Command &cmd) {
+    std::string filename = cmd.getTokens()[1].getLexeme();
+
+    std::vector<Command> commands = CommandFromFile(filename).getCommands();
+
+    for (auto cmd : commands) {
+        processCommand(cmd);
+    }
+}
+
+
+
+
+
+
+
 
 
 

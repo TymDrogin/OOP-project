@@ -292,7 +292,9 @@ bool Command::isExec() const {
         bool isValidSequence = _tokens[0].getLexeme() == "exec"
                && _tokens[1].getType() == TokenType::Keyword;
 
-        std::ifstream inputFile(_tokens[1].getLexeme());
+        std::string filename = _tokens[1].getLexeme();
+        std::string filenameWithPath = USER_COMMANDS_DIRECTORY_PREFIX + filename;
+        std::ifstream inputFile(filenameWithPath);
 
         if (inputFile.is_open()) {
             return isValidSequence;

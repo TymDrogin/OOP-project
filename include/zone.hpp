@@ -32,5 +32,9 @@ public:
     Zone(int ID);
 
     int getID() const;
+    int getNumSensors() const;
+    int getNumDevices() const;
+    int getNumRules() const;
+
     void nextSimulationStep();
 };
