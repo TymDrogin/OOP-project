@@ -15,7 +15,7 @@ void App::run() {
 
     Terminal& trm = Terminal::instance();
     
-    for(int i=1; i<25; i++) {
+    for(int i=0; i<19; i++) {
         trm.init_color(i, i, 0);
     }
 
@@ -23,31 +23,61 @@ void App::run() {
     Window logs = Window(APP_WIDTH / 2, 0, APP_WIDTH / 2, (APP_HEIGHT * 3) / 4, true);
     Window housing = Window(0, 0, APP_WIDTH / 2, (APP_HEIGHT * 3) / 4, true);
 
-    HouseManager house(logs, housing);
+    HouseManager house;
+
+    int logsWriteCounter = 0;
 
     while(true) {
         console.clear();
-        console << set_color(0) << "House-sim>>> ";
         std::string input;
-        console << set_color(2) >> input;
+        console << set_color(0) << "House-sim>>> " << set_color(2) >> input;
 
-        std::string processedInput = Command(input).getCommandTypeAsString();
         console.clear();
 
-        if(Command(input).isValid()) {
-            console << set_color(2) << "Your command type is: " + processedInput + '\n';
+        if(logsWriteCounter > MAX_LOGS_DISPLAYED) {
+            logs.clear();
+            logsWriteCounter = 0;
+        }
 
-            house.processCommand(Command(input));
-            getchar();
-        } else {
-            console << set_color(4) << "Your command type is: " + processedInput + '\n';
-            getchar();
+        try {
+            Command command(input);
+            std::string commandTypeString = command.getCommandTypeAsString();
+
+            if (Command(input).isValid()) {
+                logs  << set_color(2) << "The command " + commandTypeString + " has been executed." + '\n';
+                house.processCommand(Command(input), housing, logs, console);
+                logsWriteCounter++;
+
+            } else {
+                logs << set_color(1) << "Invalid command!." << '\n';
+                logsWriteCounter++;
+                displayCommandHint(command, console);
+                getchar();
+            }
+        } catch(const std::logic_error&) {
+            logs << set_color(5) << "Invalid symbol has been used, try again.";
+            logsWriteCounter++;
         }
     }
 }
 
 
 
+void App::displayCommandHint(Command& cmd, term::Window& console) {
+    std::string commandName = cmd.getTokens()[0].getLexeme();
+
+    auto it = COMMAND_HINTS_LOOKUP.find(commandName);
+    console.clear();
+    console << set_color(0) << "House-sim>>> ";
+
+    if (it != COMMAND_HINTS_LOOKUP.end()) {
+        // Key found in the map, perform logic accordingly
+        console << term::set_color(11) << "It appears you where trying to execute: " + commandName << term::set_color(5) <<'\n';
+        console << term::set_color(11) << "Correct format is: " << term::set_color(5) << COMMAND_HINTS_LOOKUP.at(commandName);
+    } else {
+        console << term::set_color(9) << "Please provide correct name of the command to get a hint.";
+    }
+}
 
 void App::close() {
     Terminal::instance().clear();

@@ -35,6 +35,6 @@ public:
     int getNumSensors() const;
     int getNumDevices() const;
     int getNumRules() const;
-
+    std::map<PropertyType, int> getZoneProps() const;
     void nextSimulationStep();
 };

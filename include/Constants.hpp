@@ -1,29 +1,18 @@
 #pragma once
 #include <string>
+#include <unordered_map>
 
-//GRID SETTINGS
-
-// HOUSING GRID SIZE CONTROL
-constexpr int APP_HOUSING_ROWS = 2;
-constexpr int APP_HOUSING_COLUMNS = 2;
-
-// OFFSET FROM THE ORIGIN
-constexpr int APP_HOUSING_OFFSET_X = 4;
-constexpr int APP_HOUSING_OFFSET_Y = 4;
-
-// SINGLE TILE DIMENSIONS
-constexpr int APP_HOUSING_TILE_HEIGHT = 5;
-constexpr int APP_HOUSING_TILE_WIDTH = 5;
-
-// TILE SPACING
-constexpr int APP_HOUSING_TILE_SPACING_X = 1;
-constexpr int APP_HOUSING_TILE_SPACING_Y = 0;
-
-
-// GLOBAL APP SETTINGS
 // APP SETTINGS
 constexpr int APP_WIDTH = 80;
 constexpr int APP_HEIGHT = 24;
+constexpr int MAX_LOGS_DISPLAYED = 3;
+
+
+
+// HOUSE MANAGER SETTING
+constexpr int HOUSE_MANAGER_MIN_ROOMS_DIMENSION = 2;
+constexpr int HOUSE_MANAGER_MAX_ROOMS_DIMENSION = 5;
+
 
 // Used in property
 constexpr int DEFAULT_VALUE = -1;
@@ -40,7 +29,9 @@ constexpr int ZONE_DEFAULT_SOUND = 0;
 // Gadgets related controls
 
 
-
 // File processing related
 const std::string USER_COMMANDS_DIRECTORY_PREFIX = "user-commands/";
 
+// User experience related
+
+extern const std::unordered_map<std::string, std::string> COMMAND_HINTS_LOOKUP;

@@ -6,7 +6,7 @@
 #include "command.hpp"
 #include "houseManager.hpp"
 #include "../lib/Terminal.h"
-
+#include <cctype>
 
 
 using namespace term;
@@ -26,4 +26,5 @@ public:
 private:
     App();
     static void setTerminalDimensions(int x, int y);
+    static void displayCommandHint(Command& cmd, term::Window& console);
 };

@@ -1,13 +1,11 @@
 #include "houseManager.hpp"
 /* Public */
 
-
-HouseManager::HouseManager(term::Window &logs, term::Window &housing) : _logsWindow(logs), _housingWindow(housing) {};
-
-
-
-
-void HouseManager::processCommand(Command cmd) {
+HouseManager::HouseManager() {};
+void HouseManager::processCommand(Command cmd,
+                                  term::Window& housing,
+                                  term::Window& logs,
+                                  term::Window& console) {
     // If invalid command has been sent exeption
     if(!cmd.getCommandType()) {
         throw std::logic_error("Invalid command has been passed to the manager");
@@ -38,14 +36,14 @@ void HouseManager::processCommand(Command cmd) {
             zRem(cmd);
             break;
         case CommandType::Zlista:
-            zLista();
+            zLista(housing);
             break;
 // -------Commands to manage zones and their content-------
         case CommandType::Zcomp:
             zComp(cmd);
             break;
         case CommandType::Zprops:
-            zProps(cmd);
+            zProps(cmd, logs);
             break;
         case CommandType::Pmod:
             pMod(cmd);
@@ -59,11 +57,11 @@ void HouseManager::processCommand(Command cmd) {
 
 // -------Commands for rule processors------
 // -------Commands to interact with devices-------
-// -------Commands for copying/retrieving rule processors--------
+// ------    void displayCommandHint(term::Window& console);-Commands for copying/retrieving rule processors--------
 
 // -------Additional general commands--------
         case CommandType::Exec:
-            exec(cmd);
+            exec(cmd, housing, logs, console);
             break;
 
         default:
@@ -74,22 +72,36 @@ void HouseManager::processCommand(Command cmd) {
 }
 
 void HouseManager::displayZonesData(term::Window& win) {
+    win.clear();
     for (auto &zone : _zones) {
         win << term::set_color(2) << "ID: " << zone->getID()           << term::set_color(0) << ", ";
-        win << term::set_color(3) << "Sens:  "<< zone->getNumSensors() << term::set_color(0) << ", ";
+        win << term::set_color(3) << "Sens: "<< zone->getNumSensors() << term::set_color(0) << ", ";
         win << term::set_color(4) << "Rules: "<< zone->getNumRules()   << term::set_color(0) << ", ";
-        win << term::set_color(5) << "Devs: "<< zone->getNumDevices();
+        win << term::set_color(5) << "Devices: "<< zone->getNumDevices();
 
         win << '\n';
     }
 };
-
+void HouseManager::displayZoneProps(term::Window& win, int ID) {
+    win.clear();
+    for(auto &zone : _zones) {
+        if(zone->getID() == ID) {
+            win << term::set_color(14) << "Props of the zone with ID " << ID << ":"<<  '\n';
+            win << term::set_color(2) << "Temp: " << term::set_color(7) << zone->getZoneProps().at(PropertyType::Temperature) << '\n';
+            win << term::set_color(3) << "Light: " << term::set_color(7) << zone->getZoneProps().at(PropertyType::Light) << '\n';
+            win << term::set_color(4) << "Radiation: " << term::set_color(7) << zone->getZoneProps().at(PropertyType::Radiation) << '\n';
+            win << term::set_color(5) << "Vibration: " << term::set_color(7) << zone->getZoneProps().at(PropertyType::Vibration) << '\n';
+            win << term::set_color(6) << "Humidity: " << term::set_color(7) << zone->getZoneProps().at(PropertyType::Humidity) << '\n';
+            win << term::set_color(10) << "Smoke: " << term::set_color(7) << zone->getZoneProps().at(PropertyType::Smoke) << '\n';
+            win << term::set_color(9) << "Sound: " << term::set_color(7) << zone->getZoneProps().at(PropertyType::Sound) << '\n';
+            break;
+        }
+    }
+}
 
 int HouseManager::getZoneIndex(int posX, int posY) {
     return posY * _zonesDimension_H + posX;
 }
-
-
 
 // -------Commands for simulated time-------
 void HouseManager::next() {
@@ -103,11 +115,14 @@ void HouseManager::advance(Command& cmd) {
         next();
     }
 }
-
 // -------Commands for managing housing and zones------
 void HouseManager::hNova(Command &cmd) {
     _zonesDimension_H = std::stoi(cmd.getTokens()[1].getLexeme());
     _zonesDimension_W = std::stoi(cmd.getTokens()[2].getLexeme());
+
+    // Checks if both of dimensions are in bounds or set them to corresponding default value
+    _zonesDimension_H = std::clamp(_zonesDimension_H, HOUSE_MANAGER_MIN_ROOMS_DIMENSION, HOUSE_MANAGER_MAX_ROOMS_DIMENSION);
+    _zonesDimension_W = std::clamp(_zonesDimension_W, HOUSE_MANAGER_MIN_ROOMS_DIMENSION, HOUSE_MANAGER_MAX_ROOMS_DIMENSION);
 
     _zones.clear();
     for (int i = 0; i < _zonesDimension_W * _zonesDimension_H; i++) {
@@ -140,16 +155,17 @@ void HouseManager::zRem(Command &cmd) {
         }
     }
 }
-void HouseManager::zLista() {
-    displayZonesData(_logsWindow);
+void HouseManager::zLista(term::Window& win) {
+    displayZonesData(win);
 }
 
 void HouseManager::zComp(Command &cmd) {
 
 }
 
-void HouseManager::zProps(Command &cmd) {
-
+void HouseManager::zProps(Command &cmd, term::Window& win) {
+    int ID = std::stoi(cmd.getTokens()[1].getLexeme());
+    displayZoneProps(win, ID);
 }
 
 void HouseManager::pMod(Command &cmd) {
@@ -216,13 +232,16 @@ void HouseManager::pLista() {
 
 
 // -------Additional general commands--------
-void HouseManager::exec(Command &cmd) {
+void HouseManager::exec(Command& cmd, term::Window& housing, term::Window& logs, term::Window& console) {
     std::string filename = cmd.getTokens()[1].getLexeme();
 
-    std::vector<Command> commands = CommandFromFile(filename).getCommands();
-
-    for (auto cmd : commands) {
-        processCommand(cmd);
+    CommandFromFile commands = CommandFromFile(filename);
+    if(commands.isValid()) {
+        for (auto cmd : commands.getCommands()) {
+            processCommand(cmd, housing, logs, console);
+        }
+    } else {
+        logs << term::set_color(1) << "Invalid command file has been passed!";
     }
 }
 

@@ -5,8 +5,6 @@ Zone::Zone(int ID) : _ruleProcessor(_rules) , _ID(ID) {
 }
 
 void Zone::initializeProperties() {
-    static int callCounter = 0;
-    if (0 == callCounter) {
         _properties[PropertyType::Temperature] = ZONE_DEFAULT_TEMPERATURE;
         _properties[PropertyType::Light] = ZONE_DEFAULT_LIGHT;
         _properties[PropertyType::Radiation] = ZONE_DEFAULT_RADIATION;
@@ -14,8 +12,6 @@ void Zone::initializeProperties() {
         _properties[PropertyType::Humidity] = ZONE_DEFAULT_HUMIDITY;
         _properties[PropertyType::Smoke] = ZONE_DEFAULT_SMOKE;
         _properties[PropertyType::Sound] = ZONE_DEFAULT_SOUND;
-        callCounter++;
-    }
 }
 
 
@@ -32,6 +28,9 @@ int Zone::getNumRules() const {
     return _rules.size();
 }
 
+std::map<PropertyType, int> Zone::getZoneProps() const {
+    return _properties;
+}
 
 void Zone::nextSimulationStep() {
     for(auto &device : _devises) {
@@ -41,4 +40,6 @@ void Zone::nextSimulationStep() {
         rule->evaluate();
     }
 }
+
+
 
